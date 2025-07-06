@@ -41,15 +41,35 @@ products.forEach((products) => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart js-added-to-cart">
             <img src="images/icons/checkmark.png">
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary js-add-to-cart">
             Add to Cart
           </button>
         </div>`
 })
 
 document.querySelector('.js-product-grid').innerHTML = productHTML;
+
+
+let addToCart = document.querySelectorAll('.js-add-to-cart');
+
+addToCart.forEach(CartButton => {
+  CartButton.addEventListener('click', () => {
+    const productContainer = CartButton.closest('.product-container');
+    const addedToCart = productContainer.querySelector('.js-added-to-cart');
+    let currentOpacity = window.getComputedStyle(addedToCart).opacity;
+    if (currentOpacity === '0') {
+      addedToCart.style.opacity = '1';
+    } else {
+      addedToCart.style.opacity = '0';
+    }
+
+    setTimeout(() => {
+      addedToCart.style.opacity = '0';
+    }, 2000);
+  });
+});
