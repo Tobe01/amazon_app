@@ -46,7 +46,7 @@ products.forEach((products) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary js-add-to-cart">
+          <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id = "${products.id}">
             Add to Cart
           </button>
         </div>`
@@ -55,21 +55,46 @@ products.forEach((products) => {
 document.querySelector('.js-product-grid').innerHTML = productHTML;
 
 
-let addToCart = document.querySelectorAll('.js-add-to-cart');
+document.querySelectorAll('.js-add-to-cart')
+ .forEach((button) => {
+  button.addEventListener('click', () => {
+    // save data attribute in an array named ProductName
+    let productId = button.dataset.productId;
 
-addToCart.forEach(CartButton => {
-  CartButton.addEventListener('click', () => {
-    const productContainer = CartButton.closest('.product-container');
-    const addedToCart = productContainer.querySelector('.js-added-to-cart');
-    let currentOpacity = window.getComputedStyle(addedToCart).opacity;
-    if (currentOpacity === '0') {
-      addedToCart.style.opacity = '1';
-    } else {
-      addedToCart.style.opacity = '0';
+    // make matchingItem undefined
+    let matchingItem;  
+
+    /* Loop through the cart to check if product name is available
+    in each, and save in matching Item variable
+    */
+    cart.forEach((item) => {
+      if(productId === item.productId)
+      matchingItem = item;
+    })
+    
+    /* if product name is available. add it to matching item, and increase the quantity by 1
+     else, push a new items into the cart
+    */
+    if(matchingItem){
+      matchingItem.quantity += 1;
+    } else{
+        cart.push({
+        productId: productId,
+        quantity: 1
+      })
     }
 
-    setTimeout(() => {
-      addedToCart.style.opacity = '0';
-    }, 2000);
-  });
+    // Add items to cart and display in cart
+
+    let cartQuantity = 0;
+
+    cart.forEach((item) => {
+      cartQuantity += item.quantity;
+    })
+
+    console.log(cart); 
+
+    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+     
+})
 });
