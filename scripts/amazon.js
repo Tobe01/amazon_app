@@ -1,3 +1,7 @@
+import {products} from '../data/DataStructure.js';
+import {cart, addToCart} from '../data/cart.js';
+
+
 let productHTML = '';
 
 products.forEach((products) => {
@@ -55,38 +59,8 @@ products.forEach((products) => {
 document.querySelector('.js-product-grid').innerHTML = productHTML;
 
 
-document.querySelectorAll('.js-add-to-cart')
- .forEach((button) => {
-  button.addEventListener('click', () => {
-    // save data attribute in an array named ProductName
-    let productId = button.dataset.productId;
-
-    // make matchingItem undefined
-    let matchingItem;  
-
-    /* Loop through the cart to check if product name is available
-    in each, and save in matching Item variable
-    */
-    cart.forEach((item) => {
-      if(productId === item.productId)
-      matchingItem = item;
-    })
-    
-    /* if product name is available. add it to matching item, and increase the quantity by 1
-     else, push a new items into the cart
-    */
-    if(matchingItem){
-      matchingItem.quantity += 1;
-    } else{
-        cart.push({
-        productId: productId,
-        quantity: 1
-      })
-    }
-
-    // Add items to cart and display in cart
-
-    let cartQuantity = 0;
+function updateCartQuantity(){
+  let cartQuantity = 0;
 
     cart.forEach((item) => {
       cartQuantity += item.quantity;
@@ -95,6 +69,17 @@ document.querySelectorAll('.js-add-to-cart')
     console.log(cart); 
 
     document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+}
+
+document.querySelectorAll('.js-add-to-cart')
+ .forEach((button) => {
+  button.addEventListener('click', () => {
+    let productId = button.dataset.productId;
+    // save data attribute in an array named ProductName
+   addToCart(productId);
+    // Add items to cart and display in cart
+   updateCartQuantity();
+   
      
 })
 });
