@@ -1,4 +1,4 @@
-import {cart, matchingItem} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 
 addToCart();
@@ -62,11 +62,9 @@ document.querySelector('.js-product-grid').innerHTML = productHTML;
 function updateCartQuantity(){
 let cartQuantity = 0;
 
-  cart.forEach((item) => {
-    cartQuantity += item.quantity;
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
   })
-
-  console.log(cart); 
 
 document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 }
