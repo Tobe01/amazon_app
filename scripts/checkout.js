@@ -15,6 +15,12 @@ cart.forEach((cartItem) => {
     }
   })
 
+  // Check if matchingProduct was found before trying to use it
+  if (matchingProduct === undefined) {
+    console.warn(`Product not found for productId: ${productId}`);
+    return;
+  }
+
   orderSummaryHTML += `
    <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
             <div class="delivery-date">
@@ -39,7 +45,7 @@ cart.forEach((cartItem) => {
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary js-delete-link" data-product-Id = ${matchingProduct.id}>
+                  <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
                     Delete
                   </span>
                 </div>

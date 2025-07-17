@@ -60,7 +60,7 @@ productHTML += `<div class="product-container">
 document.querySelector('.js-product-grid').innerHTML = productHTML;
 
 
-function updateCartQuantity(){
+export function updateCartQuantity(){
 let cartQuantity = 0;
 
   cart.forEach((cartItem) => {
@@ -77,6 +77,10 @@ document.querySelectorAll('.js-add-to-cart')
     // save data attribute in an array named ProductName
    addToCart(productId);
     // Add items to cart and display in cart
-   updateCartQuantity();   
+    updateCartQuantity();
 })
 });
+
+document.addEventListener('load', () => {
+  document.querySelector('.js-display-checkout').innerHTML = cartQuantity;
+})
