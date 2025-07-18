@@ -40,11 +40,13 @@ cart.forEach((cartItem) => {
                 </div>
                 <div class="product-quantity">
                   <span>
-                    Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+                    Quantity: <span class="quantity-label js-quantity-label">${cartItem.quantity}</span>
                   </span>
-                  <span class="update-quantity-link link-primary">
+                  <span class="update-quantity-link link-primary js-update-link" data-product-id="${matchingProduct.id}">
                     Update
                   </span>
+                  <input class="quantity-input">
+                  <span class="save-quantity-link link-primary">Save</span>
                   <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
                     Delete
                   </span>
@@ -119,7 +121,7 @@ document.querySelectorAll('.js-delete-link').forEach((link) => {
 
   function updateCartQuantity(exit){
     let showItem = document.querySelector('.js-display-checkout');
-    
+
     let cartQuantity = 0;
 
     if(exit === 'yes'){
@@ -139,5 +141,21 @@ document.querySelectorAll('.js-delete-link').forEach((link) => {
   updateCartQuantity();
 
 
-
+document.querySelectorAll('.js-update-link')
+.forEach((update) => {
+  const identity = update.dataset.productId;
+  update.addEventListener('click', () => {
+    //  console.log(identity);
+    document.querySelector('.cart-item-container').classList.add('is-editing-quantity')
+    document.querySelector('.js-quantity-label').innerHTML = '';
+    update.innerHTML = '';
+    const saveLink = document.querySelector('.save-quantity-link');
+    const display = window.getComputedStyle(saveLink).display;
+    if(display === 'none'){
+       saveLink.style.display = 'flex';
+    } else {
+      saveLink.style.display = 'none';
+    };
+  })
+});
 
