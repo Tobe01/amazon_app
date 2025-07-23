@@ -178,7 +178,7 @@ document.querySelectorAll('.js-update-link')
   })
 });
 
-document.querySelector('.js-deliveryOption')
+document.querySelectorAll('.js-deliveryOption')
  .forEach((element) => {
   element.addEventListener('click', () => {
     const {productId, deliveryOptionId} = element.dataset;
