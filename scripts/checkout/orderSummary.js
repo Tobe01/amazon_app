@@ -8,12 +8,6 @@ import {renderPaymentSummary} from './paymentSummary.js';
 
 hello();
 
-let currentDate = dayjs();
-
-let recentDate = currentDate.add(7, 'days');
-
-console.log(recentDate.format('dddd, MMMM D'));
-
 export function renderOrderSummary(){
   let orderSummaryHTML = '';
 
