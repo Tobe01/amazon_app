@@ -32,7 +32,7 @@ export function renderOrderSummary(){
         const dateString = correctDate.format('dddd, MMMM D');
 
     orderSummaryHTML += `
-    <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
+    <div class="cart-item-container js-cart-item-container js-cart-item-container-${matchingProduct.id}">
               <div class="delivery-date">
                 Delivery date: ${dateString}
               </div>
@@ -48,7 +48,7 @@ export function renderOrderSummary(){
                   <div class="product-price">
                     $${formatCurrency(matchingProduct.priceCents)}
                   </div>
-                  <div class="product-quantity">
+                  <div class="product-quantity js-product-quantity-${matchingProduct.id}">
                     <span>
                       Quantity: <span class="quantity-label js-quantity-label">${cartItem.quantity}</span>
                     </span>
@@ -57,7 +57,7 @@ export function renderOrderSummary(){
                     </span>
                     <input class="quantity-input">
                     <span class="save-quantity-link link-primary">Save</span>
-                    <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
+                    <span class="delete-quantity-link link-primary js-delete-link js-delete-link-${matchingProduct.id}" data-product-id="${matchingProduct.id}">
                       Delete
                     </span>
                   </div>
@@ -81,12 +81,12 @@ export function renderOrderSummary(){
         const today = dayjs();
         const correctDate = today.add(deliveryOption.deliveryDays, 'days');
         const dateString = correctDate.format('dddd, MMMM D');
-        const currencyString = deliveryOption.priceCents === 0 ? 'FREE' : `$${formatCurrency(deliveryOption.priceCents)} -`;
+        const currencyString = deliveryOption.priceCents === 0 ? 'FREE' : `$${formatCurrency(deliveryOption.priceCents)}`;
 
         const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
         html += `
                 <div class="delivery-option js-deliveryOption"
-                data-product-id = "${matchingProduct.id}" data-delivery-option-id = "${deliveryOption.id}">
+                 data-product-id = "${matchingProduct.id}" data-delivery-option-id = "${deliveryOption.id}">
                   <input type="radio" 
                   ${isChecked ? 'checked' : ''}
                     class="delivery-option-input"
