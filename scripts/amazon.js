@@ -19,9 +19,9 @@ productHTML += `<div class="product-container">
 
   <div class="product-rating-container">
     <img class="product-rating-stars"
-      src="images/ratings/rating-${products.rating.stars * 10}.png">
+      src="${products.getProductUrl()}">
     <div class="product-rating-count link-primary">
-      ${products.rating.count}
+      ${products.getProductPrice()}
     </div>
   </div>
 
