@@ -1,6 +1,12 @@
-class Cart = {
-  cartItem = undefined;
-  localStorageKey = undefined;
+class Cart {
+  cartItem;
+  localStorageKey;
+
+  constructor(localStorageKey){
+    this.loadFromStorage(localStorageKey);
+
+    this.loadFromStorage();
+  }
 
     loadFromStorage(){
     this.cartItem = JSON.parse(localStorage.getItem(this.localStorageKey));
@@ -21,7 +27,7 @@ class Cart = {
     }
 
      saveToStorage(){
-    localStorage.setItem(localStorageKey, JSON.stringify(this.cartItem))
+    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItem))
     }
 
       addToCart(productId){
@@ -75,7 +81,7 @@ class Cart = {
       })
 
     document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
-    },
+    }
 
     updateDeliveryOption(productId, deliveryOptionId){
     let matchingItem;  
@@ -86,18 +92,14 @@ class Cart = {
 
     matchingItem.deliveryOptionId = deliveryOptionId;
 
-    this.saveToStorage();
+      this.saveToStorage();
     }
-
-    return cart;
 
 }
 
-const cart = new Cart('cart-');
+const cart = new Cart('cart-oop.js');
 const businessCart = new Cart('cart-business');
 
-cart.loadFromStorage();
-businessCart.loadFromStorage();
 
 console.log(cart);
 console.log(businessCart);
