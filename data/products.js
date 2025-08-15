@@ -33,7 +33,7 @@ class product {
   }
 
   getProductPrice(){
-    return ` $${formatCurrency(this.priceCents)}`
+    return `$${formatCurrency(this.priceCents)}`
   }
 }
 class Clothing extends product(){
