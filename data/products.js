@@ -75,7 +75,7 @@ const tshirt = new Clothing ({
 let products = [];
 
 function loadBackened(){
-  const xhr = XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
 
   xhr.addEventListener('load', ()=> {
     JSON.parse(xhr.response).map((productDetails) => {
