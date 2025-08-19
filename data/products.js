@@ -72,7 +72,7 @@ const tshirt = new Clothing ({
     sizeChartLink: "images/clothing-size-chart.png"
 });
 
-let products = [];
+export let products = [];
 
 function loadBackened(){
   const xhr = new XMLHttpRequest();
@@ -84,9 +84,10 @@ function loadBackened(){
       }
      return new product(productDetails);
     });
-  })
 
-  xhr.open('GET', 'https://supersimplebackend.dev/product');
+    console.log(products);
+  });
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 }
 
