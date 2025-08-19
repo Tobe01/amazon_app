@@ -74,24 +74,23 @@ const tshirt = new Clothing ({
 
 export let products = [];
 
-function loadBackened(){
+export function loadProducts(fun){
   const xhr = new XMLHttpRequest();
 
   xhr.addEventListener('load', ()=> {
-    JSON.parse(xhr.response).map((productDetails) => {
+    products = JSON.parse(xhr.response).map((productDetails) => {
      if (productDetails.type === "clothing") {
        return new Clothing(productDetails);
       }
      return new product(productDetails);
     });
 
-    console.log(products);
+   fun();
+
   });
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 }
-
-loadBackened();
 
 
 // export const products = [
